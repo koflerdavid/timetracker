@@ -16,7 +16,7 @@ public class TimeTrackingStepdefs implements En {
     private final TaskStore taskStore;
     private final LogProvider logProvider;
     private final LogStore logStore;
-    private RunningTask currentTask = null;
+    private final TimeTrackingController timeTrackingController;
 
 
     public TimeTrackingStepdefs() {
@@ -28,19 +28,19 @@ public class TimeTrackingStepdefs implements En {
         this.logProvider = logManager;
         this.logStore = logManager;
 
+        timeTrackingController = new TimeTrackingController(taskManager, taskManager, logManager);
+
 
         Given("^there is a task \"([^\"]*)\"$", this::createOrGetExistingTask);
 
         Given("^\"([^\"]*)\" is the current task since \"([^\"]*)\"$", this::startTaskAt);
 
         When("^I stop the current task at \"([^\"]*)\"$", (final String endOfTaskDateTimeString) -> {
-            assertNotNull("There should be a running task", currentTask);
+            assertNotNull("There should be a running task", timeTrackingController.getCurrentTask());
 
             final Instant endOfTask = Instant.parse(endOfTaskDateTimeString);
 
-            logStore.stopTask(currentTask, endOfTask);
-
-            currentTask = null;
+            timeTrackingController.stopCurrentTask(endOfTask);
         });
 
         Then("^there should be the following log entry:$", (final DataTable dataTable) -> {
@@ -105,13 +105,7 @@ public class TimeTrackingStepdefs implements En {
     private void startTaskAt(final String taskName, final String beginningOfTaskDateString) {
         final Instant beginning = Instant.parse(beginningOfTaskDateString);
 
-        if (null != currentTask) {
-            logStore.stopTask(currentTask, beginning);
-        }
-
-        currentTask = taskProvider.startTask(taskName, beginning);
-        assertTaskNameIs(taskName, currentTask.getTask());
-        assertEquals(beginning, currentTask.getBeginning());
+        timeTrackingController.startTask(taskName, beginning);
     }
 
     private void assertTaskNameIs(final String taskName, final Task task) {
