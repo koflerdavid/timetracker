@@ -1,17 +1,11 @@
-group 'name.koflerdavid'
-version '1.0-SNAPSHOT'
+subprojects {
+    group 'name.koflerdavid'
+    version '1.0-SNAPSHOT'
 
-apply plugin: 'java'
+    apply plugin: 'java'
+    sourceCompatibility = 1.8
 
-sourceCompatibility = 1.8
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    // https://mvnrepository.com/artifact/info.cukes/cucumber-java8
-    testCompile group: 'info.cukes', name: 'cucumber-java8', version: '1.2.5'
-
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    repositories {
+        mavenCentral()
+    }
 }
