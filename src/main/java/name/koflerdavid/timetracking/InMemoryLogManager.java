@@ -15,8 +15,7 @@ public class InMemoryLogManager implements LogProvider, LogStore {
     }
 
     @Override
-    public void stopTask(final RunningTask currentTask, final Instant endOfTask) {
-        final Duration duration = Duration.between(currentTask.getBeginning(), endOfTask);
-        logs.add(new DefaultTaskLog(currentTask.getTask().getName(), currentTask.getBeginning(), duration));
+    public void logTask(final String taskName, final Instant beginning, final Duration duration) {
+        logs.add(new DefaultTaskLog(taskName, beginning, duration));
     }
 }

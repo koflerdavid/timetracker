@@ -1,12 +1,15 @@
 package name.koflerdavid.timetracking;
 
 import java.time.Instant;
+import java.util.TreeMap;
 
 
 public class InMemoryTaskManager implements TaskProvider, TaskStore {
+    private final TreeMap<String, Task> treeMap = new TreeMap<>();
+
     @Override
     public Task createTask(final String taskName) {
-        return new DefaultTask(taskName);
+        return treeMap.computeIfAbsent(taskName, (name) -> new DefaultTask(name));
     }
 
     @Override
@@ -21,6 +24,6 @@ public class InMemoryTaskManager implements TaskProvider, TaskStore {
 
     @Override
     public Task getTaskByName(final String taskName) {
-        return null;
+        return treeMap.get(taskName);
     }
 }

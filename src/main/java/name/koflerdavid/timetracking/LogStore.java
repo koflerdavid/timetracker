@@ -1,8 +1,9 @@
 package name.koflerdavid.timetracking;
 
+import java.time.Duration;
 import java.time.Instant;
 
 
 public interface LogStore {
-    void stopTask(RunningTask currentTask, Instant endOfTask);
+    void logTask(String taskName, Instant beginning, Duration duration);
 }
