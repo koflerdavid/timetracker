@@ -1,5 +1,6 @@
 package name.koflerdavid.timetracking;
 
+import name.koflerdavid.timetracking.impl.DefaultRunningTaskFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +44,7 @@ public class TimeTrackingControllerTest {
         logStore = inMemoryLogManager;
         logProvider = inMemoryLogManager;
 
-        timeTrackingController = new TimeTrackingController(taskProvider, taskStore, logStore);
+        timeTrackingController = new TimeTrackingController(new DefaultRunningTaskFactory(), taskProvider, taskStore, logStore);
     }
 
     @Test

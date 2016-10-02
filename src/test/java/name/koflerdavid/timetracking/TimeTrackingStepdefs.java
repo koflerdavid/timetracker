@@ -2,6 +2,7 @@ package name.koflerdavid.timetracking;
 
 import cucumber.api.DataTable;
 import cucumber.api.java8.En;
+import name.koflerdavid.timetracking.impl.DefaultRunningTaskFactory;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -28,7 +29,7 @@ public class TimeTrackingStepdefs implements En {
         this.logProvider = logManager;
         this.logStore = logManager;
 
-        timeTrackingController = new TimeTrackingController(taskManager, taskManager, logManager);
+        timeTrackingController = new TimeTrackingController(new DefaultRunningTaskFactory(), taskManager, taskManager, logManager);
 
 
         Given("^there is a task \"([^\"]*)\"$", this::createOrGetExistingTask);

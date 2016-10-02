@@ -1,7 +1,5 @@
 package name.koflerdavid.timetracking;
 
-import name.koflerdavid.timetracking.impl.DefaultRunningTask;
-
 import java.time.Duration;
 import java.time.Instant;
 import java.util.concurrent.atomic.AtomicReference;
@@ -9,12 +7,14 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class TimeTrackingController {
     private final AtomicReference<RunningTask> currentTask = new AtomicReference<>();
+
+    private final RunningTaskFactory runningTaskFactory;
     private final TaskProvider taskProvider;
     private final TaskStore taskStore;
     private final LogStore logStore;
 
-
-    public TimeTrackingController(final TaskProvider taskProvider, final TaskStore taskStore, final LogStore logStore) {
+    public TimeTrackingController(final RunningTaskFactory runningTaskFactory, final TaskProvider taskProvider, final TaskStore taskStore, final LogStore logStore) {
+        this.runningTaskFactory = runningTaskFactory;
         this.taskProvider = taskProvider;
         this.taskStore = taskStore;
         this.logStore = logStore;
@@ -30,9 +30,10 @@ public class TimeTrackingController {
             newTask = taskStore.createTask(taskName);
         }
 
-        final RunningTask oldTask = currentTask.getAndSet(new DefaultRunningTask(newTask, beginningOfNewTask));
-        if (null != oldTask) {
-            logTaskExecution(oldTask, beginningOfNewTask);
+        final RunningTask newRunningTask = runningTaskFactory.createRunningTask(newTask, beginningOfNewTask);
+        final RunningTask oldRunningTask = currentTask.getAndSet(newRunningTask);
+        if (null != oldRunningTask) {
+            logTaskExecution(oldRunningTask, beginningOfNewTask);
         }
     }
 

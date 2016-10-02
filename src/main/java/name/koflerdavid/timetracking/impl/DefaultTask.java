@@ -1,6 +1,5 @@
 package name.koflerdavid.timetracking.impl;
 
-
 import name.koflerdavid.timetracking.Task;
 
 
