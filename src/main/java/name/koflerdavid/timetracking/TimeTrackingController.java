@@ -1,5 +1,7 @@
 package name.koflerdavid.timetracking;
 
+import name.koflerdavid.timetracking.impl.DefaultRunningTask;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.util.concurrent.atomic.AtomicReference;

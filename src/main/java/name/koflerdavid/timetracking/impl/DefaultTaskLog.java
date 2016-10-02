@@ -1,4 +1,6 @@
-package name.koflerdavid.timetracking;
+package name.koflerdavid.timetracking.impl;
+
+import name.koflerdavid.timetracking.TaskLog;
 
 import java.time.Duration;
 import java.time.Instant;

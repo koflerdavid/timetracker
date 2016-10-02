@@ -1,5 +1,7 @@
 package name.koflerdavid.timetracking;
 
+import name.koflerdavid.timetracking.impl.DefaultTaskLog;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;

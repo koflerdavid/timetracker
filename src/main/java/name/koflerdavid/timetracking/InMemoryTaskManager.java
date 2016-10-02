@@ -1,5 +1,8 @@
 package name.koflerdavid.timetracking;
 
+import name.koflerdavid.timetracking.impl.DefaultRunningTask;
+import name.koflerdavid.timetracking.impl.DefaultTask;
+
 import java.time.Instant;
 import java.util.TreeMap;
 
