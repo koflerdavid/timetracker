@@ -1,3 +1,4 @@
+@timetracking
 Feature: timetracking
 
   Before one can start working on a task, it has to be created.

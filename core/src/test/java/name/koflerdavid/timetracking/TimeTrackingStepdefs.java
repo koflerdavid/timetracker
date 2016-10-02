@@ -1,8 +1,11 @@
 package name.koflerdavid.timetracking;
 
+import cucumber.api.CucumberOptions;
 import cucumber.api.DataTable;
 import cucumber.api.java8.En;
+import cucumber.api.junit.Cucumber;
 import name.koflerdavid.timetracking.impl.DefaultRunningTaskFactory;
+import org.junit.runner.RunWith;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -12,11 +15,12 @@ import java.util.Objects;
 import static org.junit.Assert.*;
 
 
+@RunWith(Cucumber.class)
+@CucumberOptions(tags = "@timetracking")
 public class TimeTrackingStepdefs implements En {
     private final TaskProvider taskProvider;
     private final TaskStore taskStore;
     private final LogProvider logProvider;
-    private final LogStore logStore;
     private final TimeTrackingController timeTrackingController;
 
 
@@ -27,7 +31,6 @@ public class TimeTrackingStepdefs implements En {
 
         final InMemoryLogManager logManager = new InMemoryLogManager();
         this.logProvider = logManager;
-        this.logStore = logManager;
 
         timeTrackingController = new TimeTrackingController(new DefaultRunningTaskFactory(), taskManager, taskManager, logManager);
 
