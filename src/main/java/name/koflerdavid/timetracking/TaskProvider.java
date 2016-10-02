@@ -1,11 +1,12 @@
 package name.koflerdavid.timetracking;
 
-import java.time.Instant;
-
 
 public interface TaskProvider {
-
-    RunningTask startTask(String taskName, Instant date);
-
+    /**
+     * Tries to find the task with the specified name in the store.
+     *
+     * @param taskName
+     * @return the {@link Task} object if it is present in the store, or <code>null</code>
+     */
     Task getTaskByName(String taskName);
 }

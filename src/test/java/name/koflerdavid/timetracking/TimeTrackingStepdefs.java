@@ -92,10 +92,7 @@ public class TimeTrackingStepdefs implements En {
     }
 
     private Task createOrGetExistingTask(final String taskName) {
-        Task task = taskProvider.getTaskByName(taskName);
-        if (null == task) {
-            task = taskStore.createTask(taskName);
-        }
+        final Task task = taskStore.createTask(taskName);
 
         assertNotNull("The task should have been created", task);
         assertEquals("The task should have the name " + task, taskName, task.getName());

@@ -1,9 +1,7 @@
 package name.koflerdavid.timetracking;
 
-import name.koflerdavid.timetracking.impl.DefaultRunningTask;
 import name.koflerdavid.timetracking.impl.DefaultTask;
 
-import java.time.Instant;
 import java.util.TreeMap;
 
 
@@ -13,16 +11,6 @@ public class InMemoryTaskManager implements TaskProvider, TaskStore {
     @Override
     public Task createTask(final String taskName) {
         return treeMap.computeIfAbsent(taskName, (name) -> new DefaultTask(name));
-    }
-
-    @Override
-    public RunningTask startTask(final String taskName, final Instant date) {
-        Task task = getTaskByName(taskName);
-        if (null == task) {
-            task = createTask(taskName);
-        }
-
-        return new DefaultRunningTask(task, date);
     }
 
     @Override
