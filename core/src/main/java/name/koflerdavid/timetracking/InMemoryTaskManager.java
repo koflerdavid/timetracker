@@ -5,7 +5,7 @@ import name.koflerdavid.timetracking.impl.DefaultTask;
 import java.util.TreeMap;
 
 
-public class InMemoryTaskManager implements TaskProvider, TaskStore {
+public class InMemoryTaskManager implements TaskManager {
     private final TreeMap<String, Task> treeMap = new TreeMap<>();
 
     @Override

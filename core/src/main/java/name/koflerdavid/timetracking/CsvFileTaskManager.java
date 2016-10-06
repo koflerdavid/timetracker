@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 
-public class CsvFileTaskManager implements TaskStore, TaskProvider {
+public class CsvFileTaskManager implements TaskManager {
     private final Map<String, Task> tasks;
 
     public CsvFileTaskManager(final String tasklistFile) throws IOException {

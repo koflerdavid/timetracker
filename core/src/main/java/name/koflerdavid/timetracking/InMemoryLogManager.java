@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class InMemoryLogManager implements LogProvider, LogStore {
+public class InMemoryLogManager implements LogManager {
     private final ArrayList<TaskLog> logs = new ArrayList<>();
 
     @Override
