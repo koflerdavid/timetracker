@@ -7,6 +7,7 @@ public interface TaskStore {
      *
      * @param taskName the name of the new task.
      * @return a {@link Task} object carrying that name.
+     * @throws TimeTrackingException if there were problems when creating the task.
      */
-    Task createTask(String taskName);
+    Task createTask(String taskName) throws TimeTrackingException;
 }

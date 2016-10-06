@@ -24,7 +24,7 @@ public class TimeTrackingController {
         return currentTask.get();
     }
 
-    public void startTask(final String taskName, final Instant beginningOfNewTask) {
+    public void startTask(final String taskName, final Instant beginningOfNewTask) throws TimeTrackingException {
         Task newTask = taskProvider.getTaskByName(taskName);
         if (null == newTask) {
             newTask = taskStore.createTask(taskName);
@@ -37,7 +37,7 @@ public class TimeTrackingController {
         }
     }
 
-    public Task getTaskByName(final String taskName) {
+    public Task getTaskByName(final String taskName) throws TimeTrackingException {
         return taskProvider.getTaskByName(taskName);
     }
 

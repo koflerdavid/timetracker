@@ -2,9 +2,7 @@ package name.koflerdavid.timetracking;
 
 import name.koflerdavid.timetracking.impl.DefaultTask;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -12,9 +10,11 @@ import java.util.TreeMap;
 public class CsvFileTaskManager implements TaskManager {
     private final Map<String, Task> tasks;
 
-    public CsvFileTaskManager(final String tasklistFile) throws IOException {
-        try (FileReader reader = new FileReader(tasklistFile)) {
+    public CsvFileTaskManager(final String tasklistFile) throws TimeTrackingException {
+        try (final FileReader reader = new FileReader(tasklistFile)) {
             tasks = parseTasks(new BufferedReader(reader));
+        } catch (final IOException e) {
+            throw new TimeTrackingException("Could not load tasks", e);
         }
     }
 
