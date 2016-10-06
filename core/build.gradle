@@ -3,8 +3,8 @@ ext {
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/info.cukes/cucumber-java8
-    testCompile group: 'info.cukes', name: 'cucumber-java8', version: cucumberJvmVersion
+    // https://mvnrepository.com/artifact/info.cukes/cucumber-java
+    testCompile group: 'info.cukes', name: 'cucumber-java', version: cucumberJvmVersion
 
     // https://mvnrepository.com/artifact/info.cukes/cucumber-junit
     testCompile group: 'info.cukes', name: 'cucumber-junit', version: cucumberJvmVersion
