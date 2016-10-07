@@ -105,7 +105,7 @@ public class TimeTrackingControllerTest {
         Assert.assertEquals(startOfTask, currentTask.getBeginning());
     }
 
-    private void assertTaskLoggedCorrectly(final String taskName, final Instant startOfTask, final Instant endOfTask) {
+    private void assertTaskLoggedCorrectly(final String taskName, final Instant startOfTask, final Instant endOfTask) throws Exception {
         final TaskLog log = logProvider.getLog().iterator().next();
         Assert.assertNotNull(log);
         Assert.assertEquals(log.getTaskName(), taskName);

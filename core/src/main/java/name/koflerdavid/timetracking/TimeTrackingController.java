@@ -41,7 +41,7 @@ public class TimeTrackingController {
         return taskProvider.getTaskByName(taskName);
     }
 
-    public void stopCurrentTask(final Instant endOfTask) {
+    public void stopCurrentTask(final Instant endOfTask) throws TimeTrackingException {
         final RunningTask currentTask = this.currentTask.getAndSet(null);
 
         if (null != currentTask) {
@@ -49,7 +49,7 @@ public class TimeTrackingController {
         }
     }
 
-    protected void logTaskExecution(final RunningTask runningTask, final Instant endOfTask) {
+    protected void logTaskExecution(final RunningTask runningTask, final Instant endOfTask) throws TimeTrackingException {
         final Instant beginning = runningTask.getBeginning();
         final Duration duration = Duration.between(beginning, endOfTask);
 
