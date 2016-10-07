@@ -2,12 +2,11 @@ package name.koflerdavid.timetracking.swinggui;
 
 import name.koflerdavid.timetracking.RunningTask;
 import name.koflerdavid.timetracking.TimeTrackingController;
+import name.koflerdavid.timetracking.TimeTrackingException;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.time.Instant;
 
 
@@ -120,8 +119,13 @@ public class TimeTracker extends JFrame {
     }
 
     private void searchAndStartTask(final ActionEvent event) {
-        final String taskName = searchField.getText();
-        timeTrackingController.startTask(taskName, Instant.now());
+        try {
+            final String taskName = searchField.getText();
+            timeTrackingController.startTask(taskName, Instant.now());
+        } catch (final TimeTrackingException e) {
+            JOptionPane.showMessageDialog(this, e.getLocalizedMessage(), "Error message", JOptionPane.ERROR_MESSAGE);
+        }
+
         displayCurrentTask();
     }
 

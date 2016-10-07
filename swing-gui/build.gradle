@@ -1,3 +1,5 @@
 dependencies {
     compile project(':core')
+
+    compile group: 'net.sourceforge.argparse4j', name: 'argparse4j', version: '0.7.0'
 }
