@@ -1,6 +1,8 @@
-package name.koflerdavid.timetracking;
+package name.koflerdavid.timetracking.csv;
 
-import name.koflerdavid.timetracking.csv.CsvTaskLogIterator;
+import name.koflerdavid.timetracking.LogManager;
+import name.koflerdavid.timetracking.TaskLog;
+import name.koflerdavid.timetracking.TimeTrackingException;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;

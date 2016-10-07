@@ -1,7 +1,10 @@
 package name.koflerdavid.timetracking.swinggui;
 
 import name.koflerdavid.timetracking.*;
+import name.koflerdavid.timetracking.csv.CsvFileTaskManager;
 import name.koflerdavid.timetracking.impl.DefaultRunningTaskFactory;
+import name.koflerdavid.timetracking.memory.InMemoryLogManager;
+import name.koflerdavid.timetracking.memory.InMemoryTaskManager;
 import net.sourceforge.argparse4j.ArgumentParsers;
 import net.sourceforge.argparse4j.inf.ArgumentParser;
 import net.sourceforge.argparse4j.inf.ArgumentParserException;

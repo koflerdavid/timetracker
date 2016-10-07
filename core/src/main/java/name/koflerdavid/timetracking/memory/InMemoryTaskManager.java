@@ -1,5 +1,7 @@
-package name.koflerdavid.timetracking;
+package name.koflerdavid.timetracking.memory;
 
+import name.koflerdavid.timetracking.Task;
+import name.koflerdavid.timetracking.TaskManager;
 import name.koflerdavid.timetracking.impl.DefaultTask;
 
 import java.util.TreeMap;

@@ -5,6 +5,8 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import name.koflerdavid.timetracking.impl.DefaultRunningTaskFactory;
+import name.koflerdavid.timetracking.memory.InMemoryLogManager;
+import name.koflerdavid.timetracking.memory.InMemoryTaskManager;
 
 import java.time.Duration;
 import java.time.Instant;

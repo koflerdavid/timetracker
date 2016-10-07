@@ -1,6 +1,8 @@
 package name.koflerdavid.timetracking;
 
 import name.koflerdavid.timetracking.impl.DefaultRunningTaskFactory;
+import name.koflerdavid.timetracking.memory.InMemoryLogManager;
+import name.koflerdavid.timetracking.memory.InMemoryTaskManager;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

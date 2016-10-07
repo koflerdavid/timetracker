@@ -1,5 +1,7 @@
-package name.koflerdavid.timetracking;
+package name.koflerdavid.timetracking.memory;
 
+import name.koflerdavid.timetracking.LogManager;
+import name.koflerdavid.timetracking.TaskLog;
 import name.koflerdavid.timetracking.impl.DefaultTaskLog;
 
 import java.time.Duration;
