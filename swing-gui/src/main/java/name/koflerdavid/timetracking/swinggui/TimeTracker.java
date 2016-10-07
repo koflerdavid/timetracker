@@ -130,7 +130,12 @@ public class TimeTracker extends JFrame {
     }
 
     private void stopCurrentTask(final ActionEvent event) {
-        timeTrackingController.stopCurrentTask(Instant.now());
+        try {
+            timeTrackingController.stopCurrentTask(Instant.now());
+        } catch (final TimeTrackingException e) {
+            JOptionPane.showMessageDialog(this, e.getLocalizedMessage(), "Error message", JOptionPane.ERROR_MESSAGE);
+        }
+
         displayCurrentTask();
     }
 

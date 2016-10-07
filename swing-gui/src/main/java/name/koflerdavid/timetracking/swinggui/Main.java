@@ -1,6 +1,10 @@
 package name.koflerdavid.timetracking.swinggui;
 
-import name.koflerdavid.timetracking.*;
+import name.koflerdavid.timetracking.LogManager;
+import name.koflerdavid.timetracking.TaskManager;
+import name.koflerdavid.timetracking.TimeTrackingController;
+import name.koflerdavid.timetracking.TimeTrackingException;
+import name.koflerdavid.timetracking.csv.CsvFileLogManager;
 import name.koflerdavid.timetracking.csv.CsvFileTaskManager;
 import name.koflerdavid.timetracking.impl.DefaultRunningTaskFactory;
 import name.koflerdavid.timetracking.memory.InMemoryLogManager;
@@ -10,7 +14,6 @@ import net.sourceforge.argparse4j.inf.ArgumentParser;
 import net.sourceforge.argparse4j.inf.ArgumentParserException;
 
 import javax.swing.*;
-import java.util.Arrays;
 
 
 public class Main {
@@ -55,7 +58,11 @@ public class Main {
     }
 
     private static LogManager createLogManager(final Settings settings) {
-        return new InMemoryLogManager();
+        if (null == settings.getLogfile()) {
+            return new InMemoryLogManager();
+        }
+
+        return new CsvFileLogManager(settings.getLogfile());
     }
 
     private static ArgumentParser buildArgumentParser() {
