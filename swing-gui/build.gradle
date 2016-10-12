@@ -3,3 +3,7 @@ dependencies {
 
     compile group: 'net.sourceforge.argparse4j', name: 'argparse4j', version: '0.7.0'
 }
+
+apply plugin: 'application'
+
+mainClassName = 'name.koflerdavid.timetracking.swinggui.Main'
