@@ -5,6 +5,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import name.koflerdavid.timetracking.impl.DefaultRunningTaskFactory;
+import name.koflerdavid.timetracking.impl.DefaultTaskLog;
 import name.koflerdavid.timetracking.memory.InMemoryLogManager;
 import name.koflerdavid.timetracking.memory.InMemoryTaskManager;
 
@@ -80,23 +81,18 @@ public class TimeTrackingStepdefs {
 
         final String taskName = input.get("task");
 
+        final DefaultTaskLog expected = new DefaultTaskLog(taskName, beginning, duration);
+
+        assertTaskLogPresent(expected);
+    }
+
+    private void assertTaskLogPresent(final TaskLog expected) throws TimeTrackingException {
         boolean found = false;
         for (final TaskLog taskLog : logProvider.getLog()) {
-            // We will `continue` if a differing criterion was found.
-
-            if (!Objects.equals(taskName, taskLog.getTaskName())) {
-                continue;
+            if (Objects.equals(expected, taskLog)) {
+                found = true;
+                break;
             }
-
-            if (!Objects.equals(beginning, taskLog.getBeginning())) {
-                continue;
-            }
-
-            if (!Objects.equals(duration, taskLog.getDuration())) {
-                continue;
-            }
-
-            found = true;
         }
 
         assertTrue("The task log should have been present", found);
