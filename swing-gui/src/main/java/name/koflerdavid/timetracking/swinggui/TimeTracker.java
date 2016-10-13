@@ -29,7 +29,6 @@ public class TimeTracker extends JFrame {
 
 
     public TimeTracker(final TimeTrackingController timeTrackingController) {
-        super("Timetracker");
         this.timeTrackingController = timeTrackingController;
 
         buildGui();
@@ -37,17 +36,19 @@ public class TimeTracker extends JFrame {
         displayCurrentTask();
     }
 
-    private void buildGui() {
-        setLayout(new BorderLayout(10, 10));
+    // GUI setup methods
 
+    private void buildGui() {
         buildMenuBar();
-        setJMenuBar(menuBar);
 
         final JPanel topPanel = new JPanel();
         topPanel.setLayout(new GridLayout(2, 1));
 
+        setLayout(new BorderLayout(10, 10));
+        setJMenuBar(menuBar);
         add(buildSearchAndCurrentTaskPanel(), BorderLayout.NORTH);
 
+        setTitle("Timetracker");
         setSize(500, 300);
     }
 
@@ -70,42 +71,36 @@ public class TimeTracker extends JFrame {
     }
 
     private JPanel buildSearchAndCurrentTaskPanel() {
-        final JPanel searchAndCurrentTaskPanel = new JPanel();
-        searchAndCurrentTaskPanel.setLayout(new GridLayout(5, 1, 10, 10));
-
         searchTextFieldLabel = new JLabel("New task name:");
-        searchAndCurrentTaskPanel.add(searchTextFieldLabel);
-
-
-        final JPanel searchPanel = new JPanel();
-        searchPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 10));
 
         searchField = new JTextField("sfd");
         searchField.setColumns(33);
         searchField.setSize(new Dimension(350, searchField.getHeight()));
-        searchPanel.add(searchField);
 
         startTaskButton = new JButton("Start");
+
+        final JPanel searchPanel = new JPanel();
+        searchPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 10));
+        searchPanel.add(searchField);
         searchPanel.add(startTaskButton);
 
-        searchAndCurrentTaskPanel.add(searchPanel);
-
-
         currentTaskLabel = new JLabel("Current task:");
-        searchAndCurrentTaskPanel.add(currentTaskLabel);
 
+        currentTaskDisplay = new JLabel("f");
+        currentTaskDisplay.setBackground(Color.CYAN);
+
+        stopTaskButton = new JButton("Stop");
 
         final JPanel currentTaskPanel = new JPanel();
         currentTaskPanel.setLayout(new FlowLayout(FlowLayout.TRAILING, 10, 10));
-
-        currentTaskDisplay = new JLabel("f");
-//        currentTaskDisplay.setPreferredSize(new Dimension(370, currentTaskPanel.getHeight()));
-        currentTaskDisplay.setBackground(Color.CYAN);
         currentTaskPanel.add(currentTaskDisplay);
-
-        stopTaskButton = new JButton("Stop");
         currentTaskPanel.add(stopTaskButton);
 
+        final JPanel searchAndCurrentTaskPanel = new JPanel();
+        searchAndCurrentTaskPanel.setLayout(new GridLayout(5, 1, 10, 10));
+        searchAndCurrentTaskPanel.add(searchTextFieldLabel);
+        searchAndCurrentTaskPanel.add(searchPanel);
+        searchAndCurrentTaskPanel.add(currentTaskLabel);
         searchAndCurrentTaskPanel.add(currentTaskPanel);
 
         return searchAndCurrentTaskPanel;
@@ -118,12 +113,14 @@ public class TimeTracker extends JFrame {
         stopTaskMenuItem.addActionListener(this::stopCurrentTask);
     }
 
+    // Helper methods
+
     private void searchAndStartTask(final ActionEvent event) {
         try {
             final String taskName = searchField.getText();
             timeTrackingController.startTask(taskName, Instant.now());
         } catch (final TimeTrackingException e) {
-            JOptionPane.showMessageDialog(this, e.getLocalizedMessage(), "Error message", JOptionPane.ERROR_MESSAGE);
+            ExceptionDialog.displayException(e);
         }
 
         displayCurrentTask();
@@ -133,7 +130,7 @@ public class TimeTracker extends JFrame {
         try {
             timeTrackingController.stopCurrentTask(Instant.now());
         } catch (final TimeTrackingException e) {
-            JOptionPane.showMessageDialog(this, e.getLocalizedMessage(), "Error message", JOptionPane.ERROR_MESSAGE);
+            ExceptionDialog.displayException(e);
         }
 
         displayCurrentTask();

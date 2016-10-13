@@ -44,8 +44,7 @@ public class Main {
             System.exit(1);
 
         } catch (final TimeTrackingException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace(System.err);
+            ExceptionDialog.displayException(e);
         }
     }
 
